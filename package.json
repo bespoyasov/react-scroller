@@ -1,8 +1,9 @@
 {
   "name": "react-prokrutchik",
-  "version": "0.2.0",
-  "main": "./src/react-scroller.js",
+  "version": "0.4.0",
+  "main": "src/react-scroller.js",
   "devDependencies": {
+    "array-from": "^2.1.1",
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
     "babel-plugin-transform-class-properties": "^6.6.0",

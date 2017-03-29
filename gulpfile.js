@@ -11,16 +11,16 @@ var gulp = require('gulp'),
 
 
 gulp.task('scripts', function() {
-	browserify('src/app.js', {
-		entries: ['src/app.js'], 
-		debug: true
+	browserify('src/react-scroller.js', {
+		entries: ['src/react-scroller.js'], 
+		debug: false
 	})
 		.transform(babelify, {
 			presets: ['es2015', 'react', 'stage-2'],
 			plugins: ['transform-class-properties', "transform-object-rest-spread"]
 		})
 		.bundle()
-        .pipe(source('app.js'))
+        .pipe(source('react-scroller.js'))
         .pipe(jshint())
         .pipe(gulp.dest('dist/'))
 		.pipe(notify('Scripts task completed'));
