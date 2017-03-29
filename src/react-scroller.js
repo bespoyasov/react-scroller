@@ -1,6 +1,6 @@
 import React from 'react'
 import {isEqual} from 'lodash'
-import 'prokrutchik/build/scroller-min'
+import './scroller'
 
 
 export default class ReactScroller extends React.Component {
@@ -24,44 +24,43 @@ export default class ReactScroller extends React.Component {
       ...config
     })
 
+    this.scroller.update({...config})
+
     if (startPosition) {
-      const endpoint = startPosition.position || 0
-      const speed = startPosition.speed || null
+      const endpoint = startPosition.position 
+      const speed = startPosition.speed
       this.scroller.scrollTo(endpoint, speed)
     }
   }
 
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const {config} = this.props
-
-    // this.scroller = new Scroller({
-    //   el: this.refs.root,
-    //   ...config
-    // })
-  }
-
-
-  componentWillUnmount() {
-    delete this.scroller
+    this.scroller.update({...config})
   }
 
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.children.length !== this.props.children.length) {
-      this.refs.root.querySelector('.ab_scroller-wrapper').remove()
-      return true
-    }
-
-    return !isEqual(newProps.config, this.props.config)
+    return nextProps.children.length !== this.props.children.length 
+      || !isEqual(newProps.config, this.props.config)
   }
 
 
   render() {
     const {children} = this.props
+    const prefix = 'ab_scroller'
 
-    return <div ref="root">
-      {children}
+    return <div ref="root" className={`${prefix}`}>
+      <div className={`${prefix}-wrapper`}>
+        <div className={`${prefix}-border ${prefix}-border--left`}></div>
+        <div className={`${prefix}-border ${prefix}-border--right`}></div>
+        <div className={`${prefix}-strip`}>{children}</div>
+
+        <div className={`${prefix}-scrollwrap`}>
+          <div className={`${prefix}-scrollbar`}></div>
+        </div>
+        <div className={`${prefix}-anchors`}></div>
+      </div>
     </div>
   }
 }

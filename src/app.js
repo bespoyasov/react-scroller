@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props, context)
 
     this.state = {
-      textItems: ['asd', 'asdasdas', 'asd']
+      textItems: ['asd', 'asdasdas', 'asd', 'asd', 'asdasdas', 'asd', 'asd', 'asdasdas', 'asd']
     }
   }
   
@@ -17,7 +17,7 @@ class App extends React.Component {
       this.setState({
         textItems: ['1', '2', '3', '4', '5']
       })
-    }, 1000)
+    }, 1500)
   }
 
 
@@ -26,7 +26,7 @@ class App extends React.Component {
       noScrollbar: false,
       noAnchors: false,
       align: 'center',
-      onClick: null
+      onClick: e => {console.log(e)}
     }
 
     const startPosition = {
@@ -39,7 +39,7 @@ class App extends React.Component {
       startPosition={startPosition}
     >
       {this.state.textItems.map((item, i) => {
-        return <div className="item" key={i}>{item}</div>
+        return <div className="item" key={i} data-anchor={item}>{item}</div>
       })}
     </ReactScroller>
   }
