@@ -1,6 +1,6 @@
 {
-  "name": "newProject",
-  "version": "0.0.0",
+  "name": "react-prokrutchik",
+  "version": "0.1.0",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
@@ -31,7 +31,6 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "prokrutchik": "^2.0.2",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
   }
