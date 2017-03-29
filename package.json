@@ -1,6 +1,7 @@
 {
   "name": "react-prokrutchik",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "main": "./src/react-scroller.js",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",

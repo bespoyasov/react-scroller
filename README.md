@@ -1,29 +1,40 @@
 # react-scroller
 
-In development, not released yet.
+Wrapper for [http://scroller.bespoyasov.ru](http://scroller.bespoyasov.ru).
 
 ## Installation
 
-```npm install react-scroller --save```
+```npm install react-prokrutchik --save```
 
 ## Usage
 
 ```javascript
 import React from 'react'
-import {Scroller} from 'react-scroller'
+import ReactScroller from 'react-prokrutchik'
 
 class App extends React.Component {
-  const {children} = this.props
-  const config = {
-    align: 'center',
-    noAnchors: true,
-    noScrollbar: true
-  }
-
+  
   render() {
-    return <Scroller config={config}>
-      {children}
-    </Scroller>
+    const config = {
+      noScrollbar: false,
+      noAnchors: false,
+      align: 'center',
+      onClick: e => { console.log(e) }
+    }
+
+    const startPosition = {
+      position: 200,
+      speed: 200
+    }
+
+    return <ReactScroller 
+      config={config}
+      startPosition={startPosition}
+    >
+      {['text1', 'text2', 'text3'].map((item, i) => {
+        return <div className="item" key={i} data-anchor={item}>{item}</div>
+      })}
+    </ReactScroller>
   }
 }
 ```
