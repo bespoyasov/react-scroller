@@ -1,18 +1,12 @@
 import React from 'react'
 import {isEqual} from 'lodash'
-import './scroller'
+import './scroller.js'
 
 
 export default class ReactScroller extends React.Component {
 
   constructor(props, context) {
     super(props, context)
-  }
-
-  
-  static propTypes = {
-    config: React.PropTypes.object,
-    startPosition: React.PropTypes.object
   }
 
 

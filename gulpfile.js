@@ -11,16 +11,16 @@ var gulp = require('gulp'),
 
 
 gulp.task('scripts', function() {
-	browserify('src/react-scroller.js', {
-		entries: ['src/react-scroller.js'], 
+	browserify('src/app.js', {
+		entries: ['src/app.js'], 
 		debug: false
 	})
 		.transform(babelify, {
 			presets: ['es2015', 'react', 'stage-2'],
-			plugins: ['transform-class-properties', "transform-object-rest-spread"]
+			plugins: ['transform-class-properties']
 		})
 		.bundle()
-        .pipe(source('react-scroller.js'))
+        .pipe(source('app.js'))
         .pipe(jshint())
         .pipe(gulp.dest('dist/'))
 		.pipe(notify('Scripts task completed'));
@@ -28,9 +28,9 @@ gulp.task('scripts', function() {
 
 
 gulp.task('scripts-minify', function() {
-	return gulp.src('dist/react-scroller.js')
+	return gulp.src('./dist/react-scroller.js')
 		.pipe(minify())
-        .pipe(gulp.dest('dist/react-scroller-min.js'))
+    .pipe(gulp.dest('./dist/'))
 		.pipe(notify('Scripts-minify task completed'));
 });
 
