@@ -1,6 +1,6 @@
 # react-scroller
 
-Wrapper for [http://scroller.bespoyasov.ru](http://scroller.bespoyasov.ru).
+Wrapper for [Prokrutchik](https://github.com/bespoyasov/scroller).
 
 ## Installation
 
