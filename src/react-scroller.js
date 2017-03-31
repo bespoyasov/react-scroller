@@ -1,6 +1,6 @@
 import React from 'react'
 import {isEqual} from 'lodash'
-import './scroller.js'
+import '../dist/scroller.js'
 
 
 export default class ReactScroller extends React.Component {

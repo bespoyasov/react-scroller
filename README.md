@@ -19,12 +19,8 @@ class App extends React.Component {
       noScrollbar: false,
       noAnchors: false,
       align: 'center',
+      start: 'center',
       onClick: e => { console.log(e) }
-    }
-
-    const startPosition = {
-      position: 200,
-      speed: 200
     }
 
     return <ReactScroller 
