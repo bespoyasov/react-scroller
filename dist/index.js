@@ -14,7 +14,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
-require('./scroller.js');
+require('../dist/scroller.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

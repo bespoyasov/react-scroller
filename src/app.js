@@ -13,11 +13,11 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        textItems: ['1', '2', '3', '4', '5']
-      })
-    }, 1500)
+    // setTimeout(() => {
+    //   this.setState({
+    //     textItems: ['1', '2', '3', '4', '5']
+    //   })
+    // }, 1500)
   }
 
 
@@ -26,17 +26,12 @@ class App extends React.Component {
       noScrollbar: false,
       noAnchors: false,
       align: 'center',
+      start: 'center',
       onClick: e => {console.log(e)}
-    }
-
-    const startPosition = {
-      position: 200,
-      speed: 200
     }
 
     return <ReactScroller 
       config={config}
-      startPosition={startPosition}
     >
       {this.state.textItems.map((item, i) => {
         return <div className="item" key={i} data-anchor={item}>{item}</div>

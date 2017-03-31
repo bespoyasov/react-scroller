@@ -64,10 +64,9 @@
   }
 
   const getEventX = e => {
-    return e.originalEvent 
-        && e.originalEvent.touches 
-        && e.originalEvent.touches.length 
-        && e.originalEvent.touches[0].pageX 
+    return e.changedTouches
+        && e.changedTouches.length
+        && e.changedTouches[0].pageX
       || e.touches
         && e.touches.length
         && e.touches[0].pageX
@@ -101,6 +100,8 @@
         align='center',
         noAnchors=false,
         noScrollbar=false,
+        start=0,
+        startAnimDuration=1000,
         el,
         onClick
       } = config
@@ -110,6 +111,8 @@
         noAnchors: noAnchors,
         noScrollbar: noScrollbar,
         onClick: onClick,
+        start: start,
+        startAnimDuration: startAnimDuration,
 
         prefix: 'ab_scroller',
         draggingClsnm: 'is-dragging',
@@ -280,6 +283,14 @@
         this.addClass(rootNode, this.config.noScrollbarClsnm)
       }
 
+      if (rootNode.getAttribute('data-start')) {
+        this.config.start = rootNode.getAttribute('data-start')
+      }
+
+      if (rootNode.getAttribute('data-startAnimDuration')) {
+        this.config.startAnimDuration = rootNode.getAttribute('data-startAnimDuration')
+      }
+
       stripNode.addEventListener('mousedown', this.onPointerDown.bind(this))
       stripNode.addEventListener('touchstart', this.onPointerDown.bind(this))
       document.addEventListener('mousemove', this.onPointerMove.bind(this))
@@ -331,11 +342,17 @@
             // just recalc twice
             this._update()
             this._update()
-            this.animate(scrolled, scrolled, 0)
+            // this.animate(scrolled, scrolled, 0)
+            const start = this.config.start || 0
+            const startAnimDuration = this.config.startAnimDuration || 0
+            this.scrollTo(start, startAnimDuration)
           }
         }, 50)
       }
 
+      const start = this.config.start
+      const startAnimDuration = this.config.startAnimDuration
+      this.scrollTo(start, startAnimDuration)
       this.checkBorderVisibility()
     }
 
@@ -489,7 +506,7 @@
       if (!e || !scrollable) return
 
       this.handleTouchStart(e)
-      if (this.get('isAndroid') || !e.touches && (!e.originalEvent || !e.originalEvent.touches)) e.preventDefault()
+      if (!e.touches && !e.changedTouches) e.preventDefault()
 
       this.set('pointerDown', true)
       this.set('scrollbarPointerDown', false)
@@ -782,18 +799,19 @@
 
 
     handleTouchStart(e) {
-      if (!e.touches && !e.originalEvent) return
-      this.set('touchX', e.touches[0].clientX || e.originalEvent.touches[0].clientX)
-      this.set('touchY', e.touches[0].clientY || e.originalEvent.touches[0].clientY)
+      if (!e.touches && !e.changedTouches) return
+      this.set('touchX', e.changedTouches[0].clientX || e.touches[0].clientX)
+      this.set('touchY', e.changedTouches[0].clientY || e.touches[0].clientY)
+      return
     }
 
     handleTouchMove(e) {
       const touchX = this.get('touchX')
       const touchY = this.get('touchY')
-      if (!touchX || !touchY || (!e.touches && !e.originalEvent)) return
+      if (!touchX || !touchY || (!e.touches && !e.changedTouches)) return
 
-      const xUp = e.touches[0].clientX || e.originalEvent.touches[0].clientX
-      const yUp = e.touches[0].clientY || e.originalEvent.touches[0].clientY
+      const xUp = e.changedTouches[0].clientX || e.touches[0].clientX
+      const yUp = e.changedTouches[0].clientY || e.touches[0].clientY
 
       const xDiff = touchX - xUp
       const yDiff = touchY - yUp
@@ -803,6 +821,7 @@
 
       this.set('touchX', 0)
       this.set('touchY', 0)
+      return
     }
 
 
@@ -903,13 +922,17 @@
         align=this.config.align,
         noAnchors=this.config.noAnchors,
         noScrollbar=this.config.noScrollbar,
-        onClick=this.config.onClick
+        onClick=this.config.onClick,
+        start=this.config.start,
+        startAnimDuration=this.config.startAnimDuration,
       } = config
 
       this.config.align = align
       this.config.noAnchors = noAnchors
       this.config.noScrollbar = noScrollbar
       this.config.onClick = onClick
+      this.config.startAnimDuration = startAnimDuration
+      this.config.start = start
 
       this._update()
     }
