@@ -104,21 +104,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var noAnchors = _config$noAnchors === undefined ? false : _config$noAnchors;
       var _config$noScrollbar = config.noScrollbar;
       var noScrollbar = _config$noScrollbar === undefined ? false : _config$noScrollbar;
+      var _config$scrollbar = config.scrollbar;
+      var scrollbar = _config$scrollbar === undefined ? 'visible' : _config$scrollbar;
+      var _config$anchors = config.anchors;
+      var anchors = _config$anchors === undefined ? 'visible' : _config$anchors;
       var _config$start = config.start;
       var start = _config$start === undefined ? 0 : _config$start;
-      var _config$startAnimDura = config.startAnimDuration;
-      var startAnimDuration = _config$startAnimDura === undefined ? 1000 : _config$startAnimDura;
+      var _config$startAnimatio = config.startAnimation;
+      var startAnimation = _config$startAnimatio === undefined ? false : _config$startAnimatio;
       var el = config.el;
       var onClick = config.onClick;
 
 
       this.config = {
         align: align,
-        noAnchors: noAnchors,
-        noScrollbar: noScrollbar,
+        noAnchors: anchors == 'hidden' || noAnchors,
+        noScrollbar: scrollbar == 'hidden' || noScrollbar,
         onClick: onClick,
         start: start,
-        startAnimDuration: startAnimDuration,
+        startAnimation: startAnimation,
 
         prefix: 'ab_scroller',
         draggingClsnm: 'is-dragging',
@@ -271,6 +275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var prefix = this.config.prefix;
         var rootNode = this.state.el;
+        var wrapperNode = getElement('.' + prefix + '-wrapper', rootNode);
         var stripNode = getElement('.' + prefix + '-strip', rootNode);
         var linkNodes = getElements('a', stripNode);
 
@@ -280,15 +285,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var anchorsNodes = getElements('.' + prefix + '-anchor', rootNode);
 
         // config
-        if (rootNode.getAttribute('data-leftalign') || rootNode.getAttribute('data-leftIfWide') || this.config.align !== 'center') {
+        if (this.config.align !== 'center' || rootNode.getAttribute('data-leftalign') || rootNode.getAttribute('data-leftAlign') || rootNode.getAttribute('data-leftIfWide') || rootNode.getAttribute('data-leftifwide')) {
           this.addClass(rootNode, this.config.leftAlignClsnm);
         }
 
-        if (this.config.noAnchors || rootNode.getAttribute('data-noanchors')) {
+        if (this.config.noAnchors || rootNode.getAttribute('data-anchors') == 'hidden' || rootNode.getAttribute('data-noanchors') || rootNode.getAttribute('data-noAnchors')) {
           this.addClass(rootNode, this.config.noAnchorsClsnm);
         }
 
-        if (this.config.noScrollbar || rootNode.getAttribute('data-noscrollbar')) {
+        if (this.config.noScrollbar || rootNode.getAttribute('data-scrollbar') == 'hidden' || rootNode.getAttribute('data-noscrollbar') || rootNode.getAttribute('data-noScrollbar')) {
           this.addClass(rootNode, this.config.noScrollbarClsnm);
         }
 
@@ -296,8 +301,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.config.start = rootNode.getAttribute('data-start');
         }
 
-        if (rootNode.getAttribute('data-startAnimDuration')) {
-          this.config.startAnimDuration = rootNode.getAttribute('data-startAnimDuration');
+        if (rootNode.getAttribute('data-startAnimation') || rootNode.getAttribute('data-startanimation')) {
+          this.config.startAnimation = true;
         }
 
         stripNode.addEventListener('mousedown', this.onPointerDown.bind(this));
@@ -339,6 +344,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _this.checkScrollable();
         });
 
+        var startAnimationHelper = function startAnimationHelper() {
+          var centralNode = _this.findCentralNode();
+          var animation = _this.config.startAnimation ? 1000 : 0;
+          var endpoint = void 0;
+
+          if (centralNode) {
+            endpoint = centralNode.offsetLeft - wrapperNode.offsetWidth / 2 + centralNode.offsetWidth / 2;
+            endpoint = Math.min(centralNode.offsetLeft, endpoint);
+          } else endpoint = _this.config.start;
+
+          _this.scrollTo(endpoint, animation);
+        };
+
         // check for display none
         var isHidden = function isHidden(el) {
           return el.offsetParent === null;
@@ -354,18 +372,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 // just recalc twice
                 _this._update();
                 _this._update();
-                // this.animate(scrolled, scrolled, 0)
-                var _start = _this.config.start || 0;
-                var _startAnimDuration = _this.config.startAnimDuration || 0;
-                _this.scrollTo(_start, _startAnimDuration);
+
+                startAnimationHelper();
               }
             }, 50);
           })();
         }
 
-        var start = this.config.start;
-        var startAnimDuration = this.config.startAnimDuration;
-        this.scrollTo(start, startAnimDuration);
+        startAnimationHelper();
         this.checkBorderVisibility();
       }
     }, {
@@ -383,6 +397,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         Array.from(getChildren(wrapperNode)).forEach(function (itemNode) {
           _this2.addClass(itemNode, prefix + '-item');
         });
+      }
+    }, {
+      key: 'findCentralNode',
+      value: function findCentralNode() {
+        var prefix = this.config.prefix;
+        var rootNode = this.state.el;
+        var centralNodes = getElements('[data-central="true"]', rootNode);
+        return centralNodes && centralNodes.length ? centralNodes[centralNodes.length - 1].closest('.' + prefix + '-item') : null;
       }
     }, {
       key: 'removeAnchors',
@@ -941,20 +963,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var noAnchors = _config$noAnchors2 === undefined ? this.config.noAnchors : _config$noAnchors2;
         var _config$noScrollbar2 = config.noScrollbar;
         var noScrollbar = _config$noScrollbar2 === undefined ? this.config.noScrollbar : _config$noScrollbar2;
+        var scrollbar = config.scrollbar;
+        var anchors = config.anchors;
         var _config$onClick = config.onClick;
         var onClick = _config$onClick === undefined ? this.config.onClick : _config$onClick;
         var _config$start2 = config.start;
         var start = _config$start2 === undefined ? this.config.start : _config$start2;
-        var _config$startAnimDura2 = config.startAnimDuration;
-        var startAnimDuration = _config$startAnimDura2 === undefined ? this.config.startAnimDuration : _config$startAnimDura2;
+        var _config$startAnimatio2 = config.startAnimation;
+        var startAnimation = _config$startAnimatio2 === undefined ? this.config.startAnimation : _config$startAnimatio2;
 
 
         this.config.align = align;
-        this.config.noAnchors = noAnchors;
-        this.config.noScrollbar = noScrollbar;
+        this.config.noAnchors = !noAnchors ? anchors == 'hidden' : anchors != 'visible';
+
+        this.config.noScrollbar = !noScrollbar ? scrollbar == 'hidden' : scrollbar != 'visible';
+
         this.config.onClick = onClick;
-        this.config.startAnimDuration = startAnimDuration;
         this.config.start = start;
+        this.config.startAnimation = startAnimation;
 
         this._update();
       }
@@ -25591,22 +25617,13 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // setTimeout(() => {
-      //   this.setState({
-      //     textItems: ['1', '2', '3', '4', '5']
-      //   })
-      // }, 1500)
-    }
-  }, {
     key: 'render',
     value: function render() {
       var config = {
-        noScrollbar: false,
-        noAnchors: false,
+        scrollbar: 'visible',
+        anchors: 'hidden',
+        startAnimation: true,
         align: 'center',
-        start: 'center',
         onClick: function onClick(e) {
           console.log(e);
         }
@@ -25620,7 +25637,12 @@ var App = function (_React$Component) {
         this.state.textItems.map(function (item, i) {
           return _react2.default.createElement(
             'div',
-            { className: 'item', key: i, 'data-anchor': item },
+            {
+              key: i,
+              className: 'item',
+              'data-anchor': item,
+              'data-central': i == 3 ? "true" : "false"
+            },
             item
           );
         })

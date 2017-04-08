@@ -11,22 +11,14 @@ class App extends React.Component {
       textItems: ['asd', 'asdasdas', 'asd', 'asd', 'asdasdas', 'asd', 'asd', 'asdasdas', 'asd']
     }
   }
-  
-  componentDidMount() {
-    // setTimeout(() => {
-    //   this.setState({
-    //     textItems: ['1', '2', '3', '4', '5']
-    //   })
-    // }, 1500)
-  }
 
 
   render() {
     const config = {
-      noScrollbar: false,
-      noAnchors: false,
+      scrollbar: 'visible',
+      anchors: 'hidden',
+      startAnimation: true,
       align: 'center',
-      start: 'center',
       onClick: e => {console.log(e)}
     }
 
@@ -34,7 +26,12 @@ class App extends React.Component {
       config={config}
     >
       {this.state.textItems.map((item, i) => {
-        return <div className="item" key={i} data-anchor={item}>{item}</div>
+        return <div 
+          key={i} 
+          className="item" 
+          data-anchor={item}
+          data-central={i == 3 ? "true" : "false"}
+        >{item}</div>
       })}
     </ReactScroller>
   }
