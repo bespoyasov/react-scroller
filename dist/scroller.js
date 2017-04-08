@@ -100,19 +100,21 @@
         align='center',
         noAnchors=false,
         noScrollbar=false,
+        scrollbar='visible',
+        anchors='visible',
         start=0,
-        startAnimDuration=1000,
+        startAnimation=false,
         el,
         onClick
       } = config
 
       this.config = {
         align: align,
-        noAnchors: noAnchors,
-        noScrollbar: noScrollbar,
+        noAnchors: anchors == 'hidden' || noAnchors,
+        noScrollbar: scrollbar == 'hidden' || noScrollbar,
         onClick: onClick,
         start: start,
-        startAnimDuration: startAnimDuration,
+        startAnimation: startAnimation,
 
         prefix: 'ab_scroller',
         draggingClsnm: 'is-dragging',
@@ -258,6 +260,7 @@
 
       const prefix = this.config.prefix
       const rootNode = this.state.el
+      const wrapperNode = getElement(`.${prefix}-wrapper`, rootNode)
       const stripNode = getElement(`.${prefix}-strip`, rootNode)
       const linkNodes = getElements('a', stripNode)
 
@@ -268,18 +271,30 @@
 
       // config
       if (
+        this.config.align !== 'center' ||
         rootNode.getAttribute('data-leftalign') || 
+        rootNode.getAttribute('data-leftAlign') || 
         rootNode.getAttribute('data-leftIfWide') ||
-        this.config.align !== 'center'
+        rootNode.getAttribute('data-leftifwide')
       ) {
         this.addClass(rootNode, this.config.leftAlignClsnm)
       }
 
-      if (this.config.noAnchors || rootNode.getAttribute('data-noanchors')) {
+      if (
+        this.config.noAnchors || 
+        rootNode.getAttribute('data-anchors') == 'hidden' ||
+        rootNode.getAttribute('data-noanchors') ||
+        rootNode.getAttribute('data-noAnchors')
+      ) {
         this.addClass(rootNode, this.config.noAnchorsClsnm)
       }
 
-      if (this.config.noScrollbar || rootNode.getAttribute('data-noscrollbar')) {
+      if (
+        this.config.noScrollbar || 
+        rootNode.getAttribute('data-scrollbar') == 'hidden' ||
+        rootNode.getAttribute('data-noscrollbar') ||
+        rootNode.getAttribute('data-noScrollbar')
+      ) {
         this.addClass(rootNode, this.config.noScrollbarClsnm)
       }
 
@@ -287,8 +302,11 @@
         this.config.start = rootNode.getAttribute('data-start')
       }
 
-      if (rootNode.getAttribute('data-startAnimDuration')) {
-        this.config.startAnimDuration = rootNode.getAttribute('data-startAnimDuration')
+      if (
+        rootNode.getAttribute('data-startAnimation') || 
+        rootNode.getAttribute('data-startanimation')
+      ) {
+        this.config.startAnimation = true
       }
 
       stripNode.addEventListener('mousedown', this.onPointerDown.bind(this))
@@ -330,6 +348,20 @@
         this.checkScrollable()
       })
 
+      const startAnimationHelper = () => {
+        const centralNode = this.findCentralNode()
+        const animation = this.config.startAnimation ? 1000 : 0
+        let endpoint
+        
+        if (centralNode) {
+          endpoint = centralNode.offsetLeft - (wrapperNode.offsetWidth / 2) + (centralNode.offsetWidth / 2)
+          endpoint = Math.min(centralNode.offsetLeft, endpoint)
+        }
+        else endpoint = this.config.start
+        
+        this.scrollTo(endpoint, animation)
+      }
+
       // check for display none
       const isHidden = el => el.offsetParent === null
 
@@ -342,17 +374,13 @@
             // just recalc twice
             this._update()
             this._update()
-            // this.animate(scrolled, scrolled, 0)
-            const start = this.config.start || 0
-            const startAnimDuration = this.config.startAnimDuration || 0
-            this.scrollTo(start, startAnimDuration)
+            
+            startAnimationHelper()
           }
         }, 50)
       }
 
-      const start = this.config.start
-      const startAnimDuration = this.config.startAnimDuration
-      this.scrollTo(start, startAnimDuration)
+      startAnimationHelper()
       this.checkBorderVisibility()
     }
 
@@ -367,6 +395,15 @@
       Array.from(getChildren(wrapperNode)).forEach(itemNode => {
         this.addClass(itemNode, `${prefix}-item`)
       })
+    }
+
+    findCentralNode() {
+      const prefix = this.config.prefix
+      const rootNode = this.state.el
+      const centralNodes = getElements(`[data-central="true"]`, rootNode)
+      return centralNodes && centralNodes.length 
+        ? centralNodes[centralNodes.length - 1].closest(`.${prefix}-item`)
+        : null
     }
 
     removeAnchors() {
@@ -922,17 +959,25 @@
         align=this.config.align,
         noAnchors=this.config.noAnchors,
         noScrollbar=this.config.noScrollbar,
+        scrollbar,
+        anchors,
         onClick=this.config.onClick,
         start=this.config.start,
-        startAnimDuration=this.config.startAnimDuration,
+        startAnimation=this.config.startAnimation
       } = config
 
       this.config.align = align
-      this.config.noAnchors = noAnchors
-      this.config.noScrollbar = noScrollbar
+      this.config.noAnchors = !noAnchors 
+        ? anchors == 'hidden' 
+        : anchors != 'visible'
+
+      this.config.noScrollbar = !noScrollbar
+        ? scrollbar == 'hidden' 
+        : scrollbar != 'visible'
+
       this.config.onClick = onClick
-      this.config.startAnimDuration = startAnimDuration
       this.config.start = start
+      this.config.startAnimation = startAnimation
 
       this._update()
     }

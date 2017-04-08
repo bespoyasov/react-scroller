@@ -16,10 +16,11 @@ class App extends React.Component {
   
   render() {
     const config = {
-      noScrollbar: false,
-      noAnchors: false,
+      scrollbar: 'hidden',
+      anchors: 'hidden',
       align: 'center',
       start: 'center',
+      startAnimation: true,
       onClick: e => { console.log(e) }
     }
 
@@ -28,7 +29,12 @@ class App extends React.Component {
       startPosition={startPosition}
     >
       {['text1', 'text2', 'text3'].map((item, i) => {
-        return <div className="item" key={i} data-anchor={item}>{item}</div>
+        return <div 
+          key={i} 
+          className="item" 
+          data-anchor={item}
+          data-central={i == 1 ? "true" : "false"}
+        >{item}</div>
       })}
     </ReactScroller>
   }
