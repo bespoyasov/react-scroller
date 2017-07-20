@@ -1,6 +1,6 @@
 {
   "name": "react-prokrutchik",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "scripts": {
     "build-lib": "babel ./src/scroller.js -o ./dist/scroller.js",
