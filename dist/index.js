@@ -63,7 +63,7 @@ var ReactScroller = function (_React$Component) {
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(newProps.config, this.props.config);
+      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(nextProps.config, this.props.config);
     }
   }, {
     key: 'render',

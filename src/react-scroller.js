@@ -36,7 +36,7 @@ export default class ReactScroller extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.children.length !== this.props.children.length 
-      || !isEqual(newProps.config, this.props.config)
+      || !isEqual(nextProps.config, this.props.config)
   }
 
 
