@@ -1,9 +1,21 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 (function () {
 
@@ -114,7 +126,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var startAnimation = _config$startAnimatio === undefined ? false : _config$startAnimatio;
       var el = config.el;
       var onClick = config.onClick;
-
 
       this.config = {
         align: align,
@@ -328,9 +339,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           anchorNode.addEventListener('click', _this.onAnchorClick.bind(_this));
         });
 
-        // prevent clickng on links
+        // prevent clickng on links and handle focus event
         Array.from(linkNodes).forEach(function (node) {
           node.addEventListener('click', _this.onClickLink.bind(_this), false);
+          node.addEventListener('focus', _this.onFocus.bind(_this), false);
         });
 
         // rerender
@@ -691,6 +703,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return false;
       }
     }, {
+      key: 'onFocus',
+      value: function onFocus(e) {
+        console.log('a');
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.releaseScb();
+        var prefix = this.config.prefix;
+        var rootNode = this.state.el;
+        var targetNode = e.target.closest('.' + prefix + '-item');
+
+        var limitLeft = this.get('limitLeft');
+        var limitRight = this.get('limitRight');
+        var scrolled = this.get('scrolled');
+
+        var endpoint = Math.min(Math.max(targetNode.offsetLeft, limitLeft), limitRight);
+        if (Math.abs(endpoint) < 2) endpoint = 0;
+
+        this.set('mouseScroll', false);
+        this.animate(scrolled, endpoint);
+        return false;
+      }
+    }, {
       key: 'onScroll',
       value: function onScroll(e) {
         var scrollable = this.get('scrollable');
@@ -971,7 +1006,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var start = _config$start2 === undefined ? this.config.start : _config$start2;
         var _config$startAnimatio2 = config.startAnimation;
         var startAnimation = _config$startAnimatio2 === undefined ? this.config.startAnimation : _config$startAnimatio2;
-
 
         this.config.align = align;
         this.config.noAnchors = !noAnchors ? anchors == 'hidden' : anchors != 'visible';
@@ -25643,7 +25677,11 @@ var App = function (_React$Component) {
               'data-anchor': item,
               'data-central': i == 3 ? "true" : "false"
             },
-            item
+            _react2.default.createElement(
+              'a',
+              { href: '#' },
+              item
+            )
           );
         })
       );
@@ -25721,7 +25759,7 @@ var ReactScroller = function (_React$Component) {
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(newProps.config, this.props.config);
+      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(nextProps.config, this.props.config);
     }
   }, {
     key: 'render',

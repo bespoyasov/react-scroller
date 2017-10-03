@@ -327,9 +327,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           anchorNode.addEventListener('click', _this.onAnchorClick.bind(_this));
         });
 
-        // prevent clickng on links
+        // prevent clickng on links and handle focus event
         Array.from(linkNodes).forEach(function (node) {
           node.addEventListener('click', _this.onClickLink.bind(_this), false);
+          node.addEventListener('focus', _this.onFocus.bind(_this), false);
         });
 
         // rerender
@@ -687,6 +688,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (!scrollable) return e;
 
         e.preventDefault();
+        return false;
+      }
+    }, {
+      key: 'onFocus',
+      value: function onFocus(e) {
+        console.log('a');
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.releaseScb();
+        var prefix = this.config.prefix;
+        var rootNode = this.state.el;
+        var targetNode = e.target.closest('.' + prefix + '-item');
+
+        var limitLeft = this.get('limitLeft');
+        var limitRight = this.get('limitRight');
+        var scrolled = this.get('scrolled');
+
+        var endpoint = Math.min(Math.max(targetNode.offsetLeft, limitLeft), limitRight);
+        if (Math.abs(endpoint) < 2) endpoint = 0;
+
+        this.set('mouseScroll', false);
+        this.animate(scrolled, endpoint);
         return false;
       }
     }, {
