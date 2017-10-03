@@ -22,16 +22,14 @@ class App extends React.Component {
       onClick: e => {console.log(e)}
     }
 
-    return <ReactScroller 
-      config={config}
-    >
+    return <ReactScroller config={config}>
       {this.state.textItems.map((item, i) => {
         return <div 
           key={i} 
           className="item" 
           data-anchor={item}
           data-central={i == 3 ? "true" : "false"}
-        >{item}</div>
+        ><a href="#">{item}</a></div>
       })}
     </ReactScroller>
   }
