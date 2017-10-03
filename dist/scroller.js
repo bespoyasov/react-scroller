@@ -693,14 +693,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'onFocus',
       value: function onFocus(e) {
-        console.log('a');
         e.preventDefault();
         e.stopPropagation();
 
-        this.releaseScb();
         var prefix = this.config.prefix;
         var rootNode = this.state.el;
+        this.releaseScb();
+
+        // focus resolve, see: 
+        // http://wd.dizaina.net/en/internet-maintenance/js-sliders-and-the-tab-key/
+        rootNode.scrollLeft = 0;
+        setTimeout(function () {
+          rootNode.scrollLeft = 0;
+        }, 0);
+
         var targetNode = e.target.closest('.' + prefix + '-item');
+        var scrollwrapNode = getElement('.' + prefix + '-scrollwrap', rootNode);
 
         var limitLeft = this.get('limitLeft');
         var limitRight = this.get('limitRight');
