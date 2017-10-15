@@ -338,6 +338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         window.addEventListener('resize', function (e) {
           _this.setSize();
           _this.checkScrollable();
+          _this.checkBorderVisibility();
         });
 
         window.addEventListener('load', function (e) {

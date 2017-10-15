@@ -343,12 +343,14 @@ function _classCallCheck(instance, Constructor) {
         Array.from(linkNodes).forEach(function (node) {
           node.addEventListener('click', _this.onClickLink.bind(_this), false);
           node.addEventListener('focus', _this.onFocus.bind(_this), false);
+          node.addEventListener('keydown', _this.onKeyDown.bind(_this), false);
         });
 
         // rerender
         window.addEventListener('resize', function (e) {
           _this.setSize();
           _this.checkScrollable();
+          _this.checkBorderVisibility();
         });
 
         window.addEventListener('load', function (e) {
@@ -732,6 +734,17 @@ function _classCallCheck(instance, Constructor) {
         this.set('mouseScroll', false);
         this.animate(scrolled, endpoint);
         return false;
+      }
+
+      // check if enter is pressed
+
+    }, {
+      key: 'onKeyDown',
+      value: function onKeyDown(e) {
+        if (!e.keyCode || e.keyCode !== 13) return;
+        var ctrlClick = e.ctrlKey || e.metaKey;
+        var location = e.target.getAttribute('href');
+        if (ctrlClick) window.open(location, '_blank', {});else window.location = location;
       }
     }, {
       key: 'onScroll',
