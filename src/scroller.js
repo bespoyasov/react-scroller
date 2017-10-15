@@ -343,6 +343,7 @@
       window.addEventListener('resize', e => {
         this.setSize()
         this.checkScrollable()
+        this.checkBorderVisibility()
       })
 
       window.addEventListener('load', e => {
