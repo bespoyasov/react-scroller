@@ -17,7 +17,7 @@ var _isEqual = require('lodash/isEqual');
 
 var _isEqual2 = _interopRequireDefault(_isEqual);
 
-require('../dist/scroller.js');
+require('prokrutchik');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -108,4 +108,4 @@ var ReactScroller = function (_React$Component) {
 
 exports.default = ReactScroller;
 
-},{"../dist/scroller.js":"../dist/scroller.js","lodash/isEqual":"lodash/isEqual","react":"react"}]},{},[1]);
+},{"lodash/isEqual":"lodash/isEqual","prokrutchik":"prokrutchik","react":"react"}]},{},[1]);

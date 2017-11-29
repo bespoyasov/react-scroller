@@ -31,7 +31,7 @@ gulp.task('build-lib', function() {
 		entries: ['src/react-scroller.js'], 
 		debug: false
 	})
-		.external(['react', '../dist/scroller.js', 'lodash/isEqual'])
+		.external(['react', 'prokrutchik', 'lodash/isEqual'])
 		.transform(babelify, {
 			presets: ['es2015', 'react', 'stage-2'],
 			plugins: ['transform-class-properties']

@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'lodash/isEqual'
-import '../dist/scroller.js'
+import 'prokrutchik';
 
 
 export default class ReactScroller extends React.Component {
