@@ -45,7 +45,7 @@ export default class ReactScroller extends React.Component {
     const prefix = 'ab_scroller'
 
     return (
-      <div ref={div => this._root} className={`${prefix}`}>
+      <div ref={div => this._root = div} className={`${prefix}`}>
         <div className={`${prefix}-wrapper`}>
           <div className={`${prefix}-border ${prefix}-border--left`}></div>
           <div className={`${prefix}-border ${prefix}-border--right`}></div>
