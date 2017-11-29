@@ -1,3 +1,4 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12,7 +13,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
 
 require('../dist/scroller.js');
 
@@ -30,19 +33,19 @@ var ReactScroller = function (_React$Component) {
   function ReactScroller(props, context) {
     _classCallCheck(this, ReactScroller);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReactScroller).call(this, props, context));
+    return _possibleConstructorReturn(this, (ReactScroller.__proto__ || Object.getPrototypeOf(ReactScroller)).call(this, props, context));
   }
 
   _createClass(ReactScroller, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props = this.props;
-      var config = _props.config;
-      var startPosition = _props.startPosition;
+      var _props = this.props,
+          config = _props.config,
+          startPosition = _props.startPosition;
 
 
       this.scroller = new Scroller(_extends({
-        el: this.refs.root
+        el: this._root
       }, config));
 
       this.scroller.update(_extends({}, config));
@@ -63,18 +66,22 @@ var ReactScroller = function (_React$Component) {
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(nextProps.config, this.props.config);
+      return nextProps.children.length !== this.props.children.length || !(0, _isEqual2.default)(nextProps.config, this.props.config);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var children = this.props.children;
 
       var prefix = 'ab_scroller';
 
       return _react2.default.createElement(
         'div',
-        { ref: 'root', className: '' + prefix },
+        { ref: function ref(div) {
+            return _this2._root = div;
+          }, className: '' + prefix },
         _react2.default.createElement(
           'div',
           { className: prefix + '-wrapper' },
@@ -100,3 +107,5 @@ var ReactScroller = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ReactScroller;
+
+},{"../dist/scroller.js":"../dist/scroller.js","lodash/isEqual":"lodash/isEqual","react":"react"}]},{},[1]);
