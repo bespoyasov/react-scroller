@@ -26,23 +26,6 @@ gulp.task('scripts', function() {
 		.pipe(notify('Scripts task completed'));
 });
 
-gulp.task('build-lib', function() {
-	browserify('src/react-scroller.js', {
-		entries: ['src/react-scroller.js'], 
-		debug: false
-	})
-		.external(['react', 'prokrutchik', 'lodash/isEqual'])
-		.transform(babelify, {
-			presets: ['es2015', 'react', 'stage-2'],
-			plugins: ['transform-class-properties']
-		})
-		.bundle()
-        .pipe(source('index.js'))
-        .pipe(jshint())
-        .pipe(gulp.dest('dist/'))
-		.pipe(notify('Build-lib task completed'));
-});
-
 gulp.task('scripts-minify', function() {
 	return gulp.src('./dist/react-scroller.js')
 		.pipe(minify())
