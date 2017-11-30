@@ -27,7 +27,7 @@ class App extends React.Component {
     return <ReactScroller config={config}>
       {['text1', 'text2', 'text3'].map((item, i) => {
         return <div 
-          data-central={i == 4 ? "true" : "false"}
+          data-central={i == 0 ? "true" : "false"}
           data-anchor={item}
           className="item" 
           key={i} 
