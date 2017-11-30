@@ -24,7 +24,6 @@ class App extends React.Component {
       onClick: e => { console.log(e) }
     }
 
-
     return <ReactScroller config={config}>
       {['text1', 'text2', 'text3'].map((item, i) => {
         return <div 
