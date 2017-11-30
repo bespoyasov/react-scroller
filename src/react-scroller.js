@@ -1,6 +1,6 @@
 import React from 'react'
-import {isEqual} from 'lodash'
-import '../dist/scroller.js'
+import isEqual from 'lodash/isEqual'
+import 'prokrutchik';
 
 
 export default class ReactScroller extends React.Component {
@@ -14,7 +14,7 @@ export default class ReactScroller extends React.Component {
     const {config, startPosition} = this.props
     
     this.scroller = new Scroller({
-      el: this.refs.root,
+      el: this._root,
       ...config
     })
 
@@ -44,17 +44,19 @@ export default class ReactScroller extends React.Component {
     const {children} = this.props
     const prefix = 'ab_scroller'
 
-    return <div ref="root" className={`${prefix}`}>
-      <div className={`${prefix}-wrapper`}>
-        <div className={`${prefix}-border ${prefix}-border--left`}></div>
-        <div className={`${prefix}-border ${prefix}-border--right`}></div>
-        <div className={`${prefix}-strip`}>{children}</div>
+    return (
+      <div ref={div => this._root = div} className={`${prefix}`}>
+        <div className={`${prefix}-wrapper`}>
+          <div className={`${prefix}-border ${prefix}-border--left`}></div>
+          <div className={`${prefix}-border ${prefix}-border--right`}></div>
+          <div className={`${prefix}-strip`}>{children}</div>
 
-        <div className={`${prefix}-scrollwrap`}>
-          <div className={`${prefix}-scrollbar`}></div>
+          <div className={`${prefix}-scrollwrap`}>
+            <div className={`${prefix}-scrollbar`}></div>
+          </div>
+          <div className={`${prefix}-anchors`}></div>
         </div>
-        <div className={`${prefix}-anchors`}></div>
       </div>
-    </div>
+    );
   }
 }

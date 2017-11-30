@@ -26,7 +26,6 @@ gulp.task('scripts', function() {
 		.pipe(notify('Scripts task completed'));
 });
 
-
 gulp.task('scripts-minify', function() {
 	return gulp.src('./dist/react-scroller.js')
 		.pipe(minify())

@@ -12,9 +12,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
+var _isEqual = require('lodash/isEqual');
 
-require('../dist/scroller.js');
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
+require('prokrutchik');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,19 +32,19 @@ var ReactScroller = function (_React$Component) {
   function ReactScroller(props, context) {
     _classCallCheck(this, ReactScroller);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReactScroller).call(this, props, context));
+    return _possibleConstructorReturn(this, (ReactScroller.__proto__ || Object.getPrototypeOf(ReactScroller)).call(this, props, context));
   }
 
   _createClass(ReactScroller, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props = this.props;
-      var config = _props.config;
-      var startPosition = _props.startPosition;
+      var _props = this.props,
+          config = _props.config,
+          startPosition = _props.startPosition;
 
 
       this.scroller = new Scroller(_extends({
-        el: this.refs.root
+        el: this._root
       }, config));
 
       this.scroller.update(_extends({}, config));
@@ -63,18 +65,22 @@ var ReactScroller = function (_React$Component) {
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.children.length !== this.props.children.length || !(0, _lodash.isEqual)(nextProps.config, this.props.config);
+      return nextProps.children.length !== this.props.children.length || !(0, _isEqual2.default)(nextProps.config, this.props.config);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var children = this.props.children;
 
       var prefix = 'ab_scroller';
 
       return _react2.default.createElement(
         'div',
-        { ref: 'root', className: '' + prefix },
+        { ref: function ref(div) {
+            return _this2._root = div;
+          }, className: '' + prefix },
         _react2.default.createElement(
           'div',
           { className: prefix + '-wrapper' },
