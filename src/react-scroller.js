@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'lodash/isEqual'
-import 'prokrutchik';
+import 'prokrutchik'
 
 
 export default class ReactScroller extends React.Component {
@@ -15,12 +15,13 @@ export default class ReactScroller extends React.Component {
     
     this.scroller = new Scroller({
       el: this._root,
+      useOuterHtml: true,
       ...config
     })
 
     this.scroller.update({...config})
 
-    if (startPosition) {
+    if (!!startPosition) {
       const endpoint = startPosition.position 
       const speed = startPosition.speed
       this.scroller.scrollTo(endpoint, speed)
