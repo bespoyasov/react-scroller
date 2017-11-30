@@ -19,21 +19,19 @@ class App extends React.Component {
       scrollbar: 'hidden',
       anchors: 'hidden',
       align: 'center',
-      start: 'center',
+      start: 'end',
       startAnimation: true,
       onClick: e => { console.log(e) }
     }
 
-    return <ReactScroller 
-      config={config}
-      startPosition={startPosition}
-    >
+
+    return <ReactScroller config={config}>
       {['text1', 'text2', 'text3'].map((item, i) => {
         return <div 
-          key={i} 
-          className="item" 
+          data-central={i == 4 ? "true" : "false"}
           data-anchor={item}
-          data-central={i == 1 ? "true" : "false"}
+          className="item" 
+          key={i} 
         >{item}</div>
       })}
     </ReactScroller>
