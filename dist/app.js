@@ -21851,6 +21851,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var STATE_1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var STATE_2 = ['11', '22', '33', '44', '55', '66', '77', '88', '99', '10'];
+
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -21860,7 +21863,7 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props, context));
 
     _this.state = {
-      textItems: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+      textItems: STATE_1
     };
     return _this;
   }
@@ -21873,7 +21876,7 @@ var App = function (_React$Component) {
       setTimeout(function () {
         _this2.setState(function (state) {
           return {
-            textItems: ['11', '22', '33', '44', '55', '66', '77', '88', '99', '10']
+            textItems: STATE_2
           };
         });
       }, 1500);
@@ -21887,7 +21890,7 @@ var App = function (_React$Component) {
         startAnimation: true,
         align: 'center',
         onClick: function onClick(e) {
-          console.log(e);
+          return console.log(e);
         }
       };
 

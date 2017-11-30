@@ -2,13 +2,16 @@ import React from 'react'
 import {render} from 'react-dom'
 import ReactScroller from './react-scroller'
 
+const STATE_1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+const STATE_2 = ['11', '22', '33', '44', '55', '66', '77', '88', '99', '10']
+
 class App extends React.Component {
 
   constructor(props, context) {
     super(props, context)
 
     this.state = {
-      textItems: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+      textItems: STATE_1
     }
   }
 
@@ -16,7 +19,7 @@ class App extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState(state => ({
-        textItems: ['11', '22', '33', '44', '55', '66', '77', '88', '99', '10']
+        textItems: STATE_2
       }))
     }, 1500)
   }
@@ -28,7 +31,7 @@ class App extends React.Component {
       anchors: 'visible',
       startAnimation: true,
       align: 'center',
-      onClick: e => {console.log(e)}
+      onClick: e => console.log(e)
     }
 
     return <ReactScroller config={config}>
