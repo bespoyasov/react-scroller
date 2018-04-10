@@ -32,15 +32,15 @@ var ReactScroller = function (_React$Component) {
   function ReactScroller(props, context) {
     _classCallCheck(this, ReactScroller);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReactScroller).call(this, props, context));
+    return _possibleConstructorReturn(this, (ReactScroller.__proto__ || Object.getPrototypeOf(ReactScroller)).call(this, props, context));
   }
 
   _createClass(ReactScroller, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props = this.props;
-      var config = _props.config;
-      var startPosition = _props.startPosition;
+      var _props = this.props,
+          config = _props.config,
+          startPosition = _props.startPosition;
 
 
       this.scroller = new Scroller(_extends({

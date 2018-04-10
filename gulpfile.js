@@ -15,15 +15,15 @@ gulp.task('scripts', function() {
 		entries: ['src/app.js'], 
 		debug: false
 	})
-		.transform(babelify, {
-			presets: ['es2015', 'react', 'stage-2'],
-			plugins: ['transform-class-properties']
-		})
-		.bundle()
-        .pipe(source('app.js'))
-        .pipe(jshint())
-        .pipe(gulp.dest('dist/'))
-		.pipe(notify('Scripts task completed'));
+	.transform(babelify, {
+		presets: ['es2015', 'react', 'stage-2'],
+		plugins: ['transform-class-properties']
+	})
+	.bundle()
+		.pipe(source('app.js'))
+		.pipe(jshint())
+		.pipe(gulp.dest('dist/'))
+	.pipe(notify('Scripts task completed'));
 });
 
 gulp.task('scripts-minify', function() {
