@@ -5,11 +5,6 @@ import 'prokrutchik'
 
 export default class ReactScroller extends React.Component {
 
-  constructor(props, context) {
-    super(props, context)
-  }
-
-
   componentDidMount() {
     const {config, startPosition} = this.props
     

@@ -29,10 +29,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ReactScroller = function (_React$Component) {
   _inherits(ReactScroller, _React$Component);
 
-  function ReactScroller(props, context) {
+  function ReactScroller() {
     _classCallCheck(this, ReactScroller);
 
-    return _possibleConstructorReturn(this, (ReactScroller.__proto__ || Object.getPrototypeOf(ReactScroller)).call(this, props, context));
+    return _possibleConstructorReturn(this, (ReactScroller.__proto__ || Object.getPrototypeOf(ReactScroller)).apply(this, arguments));
   }
 
   _createClass(ReactScroller, [{

@@ -1,6 +1,6 @@
 {
   "name": "react-prokrutchik",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel ./src/react-scroller.js -o ./dist/index.js"
@@ -24,13 +24,13 @@
     "gulp-notify": "^3.2.0",
     "gulp-rename": "^1.2.2",
     "jshint": "^2.9.5",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
     "array-from": "^2.1.1",
-    "prokrutchik": "^2.3.4"
+    "prokrutchik": "^2.3.5"
   },
   "peerDependencies": {
     "react": ">=16.x",
