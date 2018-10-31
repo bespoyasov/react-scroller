@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "array-from": "^2.1.1",
-    "prokrutchik": "^2.3.4"
+    "prokrutchik": "^2.3.5"
   },
   "peerDependencies": {
     "react": ">=16.x",
