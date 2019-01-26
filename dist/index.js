@@ -39,7 +39,8 @@ var ReactScroller = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _props = this.props,
-          config = _props.config,
+          _props$config = _props.config,
+          config = _props$config === undefined ? {} : _props$config,
           startPosition = _props.startPosition;
 
 
@@ -59,7 +60,8 @@ var ReactScroller = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      var config = this.props.config;
+      var _props$config2 = this.props.config,
+          config = _props$config2 === undefined ? {} : _props$config2;
 
       this.scroller.update(_extends({}, config));
     }
