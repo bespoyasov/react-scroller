@@ -6,7 +6,7 @@ import 'prokrutchik'
 export default class ReactScroller extends React.Component {
 
   componentDidMount() {
-    const {config, startPosition} = this.props
+    const {config={}, startPosition} = this.props
     
     this.scroller = new Scroller({
       el: this._root,
@@ -25,7 +25,7 @@ export default class ReactScroller extends React.Component {
 
 
   componentDidUpdate() {
-    const {config} = this.props
+    const {config={}} = this.props
     this.scroller.update({...config})
   }
 
