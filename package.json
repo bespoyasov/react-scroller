@@ -1,6 +1,6 @@
 {
   "name": "react-prokrutchik",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "main": "./dist/index.js",
   "description": "React wrapper for Prokrutchik",
   "author": {

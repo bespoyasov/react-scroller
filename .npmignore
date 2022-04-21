@@ -1,2 +1,11 @@
+.babelrc
+.github
+.gitignore
+
+gulpfile.js
+dist/app.js
+
 node_modules
-dist
+src
+
+CHANGELOG.md
