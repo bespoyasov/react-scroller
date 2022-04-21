@@ -1,5 +1,4 @@
 .babelrc
-.github
 .gitignore
 
 gulpfile.js
