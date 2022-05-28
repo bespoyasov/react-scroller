@@ -16,31 +16,8 @@
   "scripts": {
     "build": "babel ./src/react-scroller.js -o ./dist/index.js"
   },
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browserify": "^16.1.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-browserify": "^0.5.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.1.0",
-    "gulp-minify": "^2.1.0",
-    "gulp-notify": "^3.2.0",
-    "gulp-rename": "^1.2.2",
-    "jshint": "^2.9.5",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "vinyl-source-stream": "^2.0.0"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "array-from": "^2.1.1",
     "prokrutchik": "^2.3.9"
   },
   "peerDependencies": {
