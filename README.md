@@ -1,10 +1,10 @@
 # React Scroller
 
-Wrapper-component for [Scroller](https://github.com/bespoyasov/scroller).
+React component wrapper for [Scroller](https://github.com/bespoyasov/scroller).
 
 ## Installation
 
-Add the package from npm:
+Add the packages from npm:
 
 ```shell
 npm install prokrutchik react-prokrutchik
