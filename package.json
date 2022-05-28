@@ -25,6 +25,11 @@
     "./package.json": "./package.json",
     "./styles.css": "./react-scroller.css"
   },
+  "files": [
+    "react-scroller.js",
+    "react-scroller.css",
+    "react-scroller.d.ts"
+  ],
   "devDependencies": {},
   "dependencies": {
     "prokrutchik": ">=3.0"
