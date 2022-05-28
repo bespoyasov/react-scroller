@@ -30,6 +30,9 @@
     "react-scroller.css",
     "react-scroller.d.ts"
   ],
+  "engines": {
+    "node": ">=14.16"
+  },
   "devDependencies": {},
   "dependencies": {
     "prokrutchik": ">=3.0"
