@@ -30,7 +30,12 @@
   },
   "author": "Alex Bespoyasov <bespoyasov@me.com>",
   "repository": "bespoyasov/react-scroller",
-  "devDependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.14.41",
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0"
+  },
   "dependencies": {
     "prokrutchik": ">=3.0"
   },
