@@ -32,3 +32,7 @@ function App() {
   );
 }
 ```
+
+## Configuration
+
+For more configuration options, check out [Scroller settings](https://github.com/bespoyasov/scroller#configuration).
