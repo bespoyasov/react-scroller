@@ -12,7 +12,7 @@ Dependency refresh, upgraded Scroller use, performance and style improvements.
 ### New Features
 
 - Added `position` property to change Scroller's current position via props.
-- Added typings to the component.
+- Added typings for the component.
 
 ## 1.2.12
 
