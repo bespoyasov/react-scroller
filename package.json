@@ -20,6 +20,11 @@
   "type": "module",
   "types": "react-scroller.d.ts",
   "module": "react-scroller.js",
+  "exports": {
+    ".": "./react-scroller.js",
+    "./package.json": "./package.json",
+    "./styles.css": "./react-scroller.css"
+  },
   "devDependencies": {},
   "dependencies": {
     "prokrutchik": ">=3.0"
