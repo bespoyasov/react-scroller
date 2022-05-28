@@ -16,6 +16,7 @@ export const Scroller = ({ children, position, config = {} }) => {
       scrollbar,
       navigation,
       align,
+      startPosition: position,
       onItemClick,
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
