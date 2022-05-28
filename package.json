@@ -2,11 +2,6 @@
   "name": "react-prokrutchik",
   "version": "1.2.12",
   "description": "React wrapper for Prokrutchik",
-  "author": {
-    "name": "Alex Bespoyasov",
-    "email": "bespoyasov@me.com",
-    "url": "https://bespoyasov.ru"
-  },
   "scripts": {
     "build": "babel ./src/react-scroller.js -o ./dist/index.js"
   },
@@ -33,6 +28,8 @@
   "engines": {
     "node": ">=14.16"
   },
+  "author": "Alex Bespoyasov <bespoyasov@me.com>",
+  "repository": "bespoyasov/react-scroller",
   "devDependencies": {},
   "dependencies": {
     "prokrutchik": ">=3.0"
