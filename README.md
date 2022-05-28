@@ -7,7 +7,7 @@ Wrapper-component for [Scroller](https://github.com/bespoyasov/scroller).
 Add the package from npm:
 
 ```shell
-npm install react-prokrutchik
+npm install prokrutchik react-prokrutchik
 ```
 
 ## Usage
