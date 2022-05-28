@@ -1,42 +1,34 @@
-# react-scroller
+# React Scroller
 
-Wrapper for [Prokrutchik](https://github.com/bespoyasov/scroller).
+Wrapper-component for [Scroller](https://github.com/bespoyasov/scroller).
 
 ## Installation
 
-```npm install react-prokrutchik --save```
+Add the package from npm:
+
+```shell
+npm install react-prokrutchik
+```
 
 ## Usage
 
-```javascript
-import React from 'react'
-import ReactScroller from 'react-prokrutchik'
+```js
+import { Scroller } from "react-prokrutchik";
+import "react-prokrutchik/styles.css";
 
-class App extends React.Component {
-  
-  render() {
-    const config = {
-      scrollbar: 'hidden',
-      anchors: 'hidden',
-      align: 'center',
-      start: 'end',
-      startAnimation: true,
-      onClick: e => { console.log(e) }
-    }
+function App() {
+  const config = {
+    scrollbar: "hidden",
+    navigation: "visible",
+    align: "start",
+  };
 
-    return <ReactScroller config={config}>
-      {['text1', 'text2', 'text3'].map((item, i) => {
-        return <div 
-          data-central={i == 0 ? "true" : "false"}
-          data-anchor={item}
-          className="item" 
-          key={i} 
-        >{item}</div>
-      })}
-    </ReactScroller>
-  }
+  return (
+    <Scroller position="center" config={config}>
+      <div>Text...</div>
+      <img src="example.png" alt="Images..." />
+      {/* ...Or Other content */}
+    </Scroller>
+  );
 }
 ```
-
-## Help
-If you have any questions send an email to [bespoyasov@me.com](mailto:bespoyasov@me.com).
