@@ -8,11 +8,6 @@
     "email": "bespoyasov@me.com",
     "url": "https://bespoyasov.ru"
   },
-  "homepage": "https://github.com/bespoyasov/react-scroller",
-  "bugs": {
-    "url": "https://github.com/bespoyasov/react-scroller/issues",
-    "email": "bespoyasov@me.com"
-  },
   "scripts": {
     "build": "babel ./src/react-scroller.js -o ./dist/index.js"
   },
