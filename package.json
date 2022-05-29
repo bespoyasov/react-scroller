@@ -42,10 +42,10 @@
     "eslint-plugin-react-hooks": "^4.5.0"
   },
   "dependencies": {
-    "prokrutchik": "^3.0.0"
+    "prokrutchik": "^3.0.1"
   },
   "peerDependencies": {
-    "prokrutchik": "^3.0.0",
+    "prokrutchik": "^3.0.1",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   }
