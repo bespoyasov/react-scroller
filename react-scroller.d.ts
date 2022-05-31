@@ -4,7 +4,13 @@ declare module "react-prokrutchik" {
 
   type ScrollerProps = React.PropsWithChildren<{
     position: ScrollerBase.ScrollDestination;
-    config: ScrollerBase.ScrollerUpdateConfig;
+    duration: ScrollerBase.MilliSecondsCount;
+
+    scrollbar: ScrollerBase.ElementVisibility;
+    navigation: ScrollerBase.ElementVisibility;
+    align: ScrollerBase.ContentAlignment;
+
+    onItemClick: (event: MouseEvent | TouchEvent) => void;
   }>;
 
   export const Scroller: React.FunctionComponent<ScrollerProps>;
