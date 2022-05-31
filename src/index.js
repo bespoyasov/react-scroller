@@ -4,6 +4,7 @@ import { Scroller as ScrollerBase } from "prokrutchik";
 export const Scroller = ({
   children,
   position,
+  duration,
   scrollbar,
   navigation,
   align,
