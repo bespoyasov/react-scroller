@@ -17,14 +17,14 @@ import { Scroller } from "react-prokrutchik";
 import "react-prokrutchik/styles.css";
 
 function App() {
-  const config = {
-    scrollbar: "hidden",
-    navigation: "visible",
-    align: "start",
-  };
-
   return (
-    <Scroller position="center" config={config}>
+    <Scroller
+      position="center"
+      duration={500}
+      scrollbar="hidden"
+      scrollbar="hidden"
+      align="start"
+    >
       <div>Text...</div>
       <img src="example.png" alt="Images..." />
       {/* ...Or Other content */}
