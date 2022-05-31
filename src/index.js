@@ -1,10 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { Scroller as ScrollerBase } from "prokrutchik";
 
-export const Scroller = ({ children, position, config = {} }) => {
-  const { scrollbar, navigation, align, onItemClick } = config;
+export const Scroller = ({
+  children,
+  position,
+  scrollbar,
+  navigation,
+  align,
+  onItemClick,
+}) => {
   const childrenCount = React.Children.count(children);
-
   const node = useRef();
   const instance = useRef();
 
