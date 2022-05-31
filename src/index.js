@@ -23,6 +23,7 @@ export const Scroller = ({
       navigation,
       align,
       startPosition: position,
+      startDuration: duration,
       onItemClick,
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
