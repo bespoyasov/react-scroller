@@ -33,8 +33,8 @@ export const Scroller = ({
   }, [scrollbar, navigation, align, onItemClick, childrenCount]);
 
   useEffect(() => {
-    instance.current?.scrollTo(position);
-  }, [position]);
+    instance.current?.scrollTo(position, duration);
+  }, [position, duration]);
 
   return (
     <article ref={node}>
