@@ -1,6 +1,6 @@
 {
   "name": "react-prokrutchik",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "React wrapper for Prokrutchik",
   "scripts": {
     "lint": "npx eslint src/**",
