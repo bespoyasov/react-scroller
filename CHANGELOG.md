@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+
+The MIT license file added.
+
 ## 3.0.0
 
 New component public API, more precise animation configuration.
