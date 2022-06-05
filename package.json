@@ -35,6 +35,7 @@
   },
   "author": "Alex Bespoyasov <bespoyasov@me.com>",
   "repository": "bespoyasov/react-scroller",
+  "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.14.41",
     "eslint": "^8.15.0",
