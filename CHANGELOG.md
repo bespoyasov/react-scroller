@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+Add the `"use client"` directive for RSC.
+
 ## 3.0.1
 
 The MIT license file added.
